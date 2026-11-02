@@ -39,7 +39,8 @@
 零依赖，**不需要 npm install**。
 
 ```bash
-git clone <this-repo> prompt-forge && cd prompt-forge
+git clone https://github.com/ansty-31/prompt-forge.git
+cd prompt-forge
 bash launch.sh                 # 起服务 + 自动开浏览器
 ```
 
