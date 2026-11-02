@@ -56,10 +56,19 @@ MOCK=1 node server.mjs                   # 演示模式：不烧额度，返回�
 ### 桌面快捷方式（Linux）
 
 ```bash
-bash install-shortcut.sh
+bash install-shortcut.sh               # 应用菜单 + 桌面
+bash install-shortcut.sh --menu-only   # 只要应用菜单
+bash install-shortcut.sh --desktop-only
 ```
 
-会同时装到**应用菜单**和**桌面**：搜「Prompt Forge」或「提示词工坊」即可。图标取自 `public/icon-512.png`。再次点击走 `launch.sh`——已在运行就直接开窗口，不重复起进程。
+装完在应用菜单搜「Prompt Forge」或「提示词工坊」，桌面上也会出现同名图标。图标取自 `public/icon-512.png`。点击走 `launch.sh`——已在运行就直接开窗口，不重复起进程。
+
+**`.desktop` 后缀是对的**，它是 freedesktop 的桌面入口标准格式。桌面图标点不动通常是这两个原因，脚本都已处理：
+
+1. **信任标记**：GNOME 的 ding 扩展要求文件的 `metadata::trusted` 为字符串 `'true'`（源码 `fileItem.js` 里是 `get_attribute_as_string('metadata::trusted') == 'true'`）。部分 gvfs 版本上 `gio set` 会报「不支持设置属性」，脚本改用 pygobject 兜底写入。
+2. **other 写位**：`unixmode & S_IWOTH` 为真时 ding 直接拒绝启动，所以文件权限固定成 `755`，不是 `775`。
+
+装完没刷新就注销重登一次；实在不行右键图标 → **Allow Launching**（这一步等价于脚本做的事）。
 
 ## 接别的模型
 
