@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Prompt Forge">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121a24"/>
+      <stop offset="1" stop-color="#0a0e13"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="509" height="509" rx="115" fill="none" stroke="#26333f" stroke-width="3"/>
+  <rect x="112" y="196" width="60" height="150" rx="30" fill="#d97757"/>
+  <rect x="226" y="132" width="60" height="214" rx="30" fill="#10a37f"/>
+  <rect x="340" y="176" width="60" height="170" rx="30" fill="#4d6bfe"/>
+  <circle cx="256" cy="404" r="14" fill="#5eead4" opacity="0.9"/>
+</svg>

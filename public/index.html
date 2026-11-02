@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prompt Forge · 提示词生成器</title>
+<meta name="description" content="把一句话需求，按 Claude / GPT / DeepSeek 各自的能力特性，生成可以直接粘贴执行的提示词。" />
+<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="bar">
+  <div class="brand">
+    <img src="/icon.svg" alt="" width="26" height="26" />
+    <div class="brand-txt">
+      <b>Prompt Forge</b>
+      <span>一句话需求 → 可直接粘贴的提示词</span>
+    </div>
+  </div>
+  <div class="bar-right">
+    <span class="status" id="status">连接中…</span>
+    <button class="icon" id="openSettings" title="API 设置（⚙）">⚙</button>
+  </div>
+</header>
+
+<section class="picks-wrap">
+  <div class="picks" id="picks" role="group" aria-label="目标模型（可多选）"></div>
+  <span class="picks-note" id="picksNote">可多选 · 并行出多份</span>
+</section>
+
+<main class="grid">
+  <section class="pane form-pane">
+    <label class="lbl" for="req">让目标模型做什么 <span class="req">*</span></label>
+    <textarea id="req" placeholder="一句话说清就行，越具体越好"></textarea>
+
+    <label class="lbl" for="notes">补充约束 <span class="opt">可选</span></label>
+    <textarea id="notes" class="small" placeholder="例：输出中文；必须给验收命令；正文不超过 300 字"></textarea>
+
+    <div class="actions">
+      <button id="go" class="primary">生成提示词</button>
+      <button id="stop" class="ghost" hidden>停止</button>
+      <kbd class="kbd">Ctrl/⌘ + Enter</kbd>
+    </div>
+  </section>
+
+  <section class="pane out-pane">
+    <div class="out-head">
+      <span class="lbl" style="margin:0">结果</span>
+      <div class="out-tools">
+        <span class="count" id="count"></span>
+        <button id="copyAll" class="ghost" disabled>全部复制</button>
+      </div>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="empty" id="empty">
+        <p class="empty-title">三个模型，三套写法</p>
+        <p class="empty-sub">同一句需求，丢给不同的模型，该给的东西完全不一样。</p>
+        <ul>
+          <li><i style="--c:#d97757"></i><b>Claude</b> — 会自己补全你没说清的部分，所以要写死边界和验收</li>
+          <li><i style="--c:#10a37f"></i><b>GPT</b> — 给不出运行证据，所以要它先列方案、给反例</li>
+          <li><i style="--c:#4d6bfe"></i><b>DeepSeek</b> — 适合机械活，所以要给模板、字段、示例行</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden>
+  <h2>API 设置</h2>
+  <p class="muted">任何 OpenAI 兼容端点都能接。Key 只存在这台机器你的浏览器里，服务端不落盘。</p>
+
+  <label class="lbl" for="baseUrl">Base URL</label>
+  <input id="baseUrl" placeholder="https://api.deepseek.com/v1" />
+
+  <label class="lbl" for="model">Model</label>
+  <input id="model" placeholder="deepseek-chat" />
+
+  <label class="lbl" for="apiKey">API Key</label>
+  <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+
+  <div class="drawer-actions">
+    <button id="save" class="primary">保存</button>
+    <button id="closeSettings" class="ghost">关闭</button>
+  </div>
+  <p class="muted tiny" id="envHint"></p>
+</aside>
+
+<script src="/app.js" type="module"></script>
+</body>
+</html>
